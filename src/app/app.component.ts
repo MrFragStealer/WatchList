@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'MrFragStealer works!';
+  onMediaItemDelete(mediaItem){
+
+  }
+  firstMediaItem = {
+    id: 1,
+    name: "Firebug",
+    medium: "Series",
+    category: "Science Fiction",
+    year: 2010,
+    watchedOn: null,
+    isFavorite: false
+  };
+
 }
