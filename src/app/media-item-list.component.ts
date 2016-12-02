@@ -20,30 +20,30 @@ export class MediaItemListComponent implements OnInit {
   },
   {
     id: 2,
-    name: "Superman",
+    name: "Cattleman's Ranch",
     medium: "Movies",
-    category: "Science Fiction",
+    category: "Drama",
     year: 2011,
     watchedOn: 43243243,
     isFavorite: false
   },
-{
-  id: 3,
-      name: "Fantastic 4",
+  {
+    id: 3,
+    name: "Fantastic 4",
     medium: "Movies",
-    category: "Science Fiction",
+    category: "Science Fiction, Comedy",
     year: 2011,
     watchedOn: 43333243,
-    isFavorite: false
-},
-{
-  id: 4,
-      name: "Chanel 0",
+    isFavorite: true
+  },
+  {
+    id: 4,
+    name: "Chanel 0",
     medium: "Series",
-    category: "Science Fiction",
+    category: "Thriller",
     year: 2011,
     watchedOn: 41113243,
-    isFavorite: false
+    isFavorite: true
 }];
 
   constructor() { }
