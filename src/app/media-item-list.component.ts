@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { MediaItemService } from './media-item.service';
 
 @Component({
   selector: 'app-media-item-list',
@@ -6,49 +9,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./media-item-list.component.css']
 })
 export class MediaItemListComponent implements OnInit {
+  medium = '';
+  mediaItems = [];
+  paramsSubscription;
 
-  onMediaItemDelete(mediaItem){}
+  onMediaItemDelete(mediaItem){
+    this.mediaItemService.delete(mediaItem)
+        .subscribe(() => {
+          this.getMediaItems(this.medium);
+        });
+  }
 
-  mediaItems = [{
-    id: 1,
-    name: "Firebug",
-    medium: "Series",
-    category: "Science Fiction",
-    year: 2010,
-    watchedOn: null,
-    isFavorite: false
-  },
-  {
-    id: 2,
-    name: "Cattleman's Ranch",
-    medium: "Movies",
-    category: "Drama",
-    year: 2011,
-    watchedOn: 43243243,
-    isFavorite: false
-  },
-  {
-    id: 3,
-    name: "Fantastic 4",
-    medium: "Movies",
-    category: "Science Fiction, Comedy",
-    year: 2011,
-    watchedOn: 43333243,
-    isFavorite: true
-  },
-  {
-    id: 4,
-    name: "Chanel 0",
-    medium: "Series",
-    category: "Thriller",
-    year: 2011,
-    watchedOn: 41113243,
-    isFavorite: true
-}];
 
-  constructor() { }
+  constructor(
+      private mediaItemService: MediaItemService,
+      private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.paramsSubscription = this.activatedRoute.params
+        .subscribe(params => {
+          let medium = params['medium'];
+          if(medium.toLowerCase() === 'all'){
+            medium = '';
+          }
+          this.getMediaItems(medium);
+        });
+  }
+
+  ngOnDestroy(){
+    this.paramsSubscription.unsubscribe();
+  }
+
+  getMediaItems(medium){
+    this.medium = medium;
+    this.mediaItemService.get(medium)
+      .subscribe(mediaItems => {
+        this.mediaItems = mediaItems;
+      });
   }
 
 }
